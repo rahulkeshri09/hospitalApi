@@ -32,3 +32,31 @@ module.exports.create=async function(req,res){
         });
     }
 }
+module.exports.patientReport=async function(req,res){
+    try{
+        console.log("req.params",req.params.id);
+        let patient=await Patient.findById(req.params.id);
+        console.log("this is patient repot",patient);
+        var arr=new Array();
+        for(let i of patient.reports){
+            let repo= await Report.findById(i);
+            let docName=await Doctor.findById(repo.doctorName);
+            let data={
+                doctorName:docName.name,
+                status:repo.status,
+                date:repo.date
+            }
+            arr.push(data);
+        }
+        return res.json(200,{
+            message:"succesfully generated patient report",
+            name:patient.name,
+            reports:arr
+        })
+    }catch(err){
+        console.log('error in generating patient report',err);
+        return res.json(500,{
+            message:"internal server error",
+        })
+    }
+}

@@ -6,14 +6,14 @@ module.exports.create=async function(req,res){
         if(!patient){
             Patient.create(req.body);
             return res.json(200,{
-                patientId:patient.id,
+                id:patient.id,
                 message:"patient id is created",
                 name:req.body.name,
                 phoneNo:req.body.phoneNo,
             })
         }else{
             return res.json(200,{
-                patientId:patient.id,
+                id:patient.id,
                 message:"patient already exists here his/her info",
                 name:patient.name,
                 phoneNo:patient.phoneNo
