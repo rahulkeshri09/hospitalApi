@@ -60,3 +60,34 @@ module.exports.patientReport=async function(req,res){
         })
     }
 }
+module.exports.status=async function(req,res){
+    try{
+        console.log(req.body.status);
+        let status=await Patient.find({});
+        let arr=new Array();
+        for(let i of status){
+            let patientName=i.name;
+            for(let j of i.reports){
+                let patientStatus=await Report.findById(j);
+                if(patientStatus.status==req.body.status){
+                    arr.push({patientName:patientName,
+                    status:patientStatus.status,
+                    date:patientStatus.date});
+                }
+            }
+        }
+        console.log(arr);
+       // console.log("this is statuses",status);
+        return res.json(200,{
+            message:"successfully generated ",
+            data:arr
+
+        })
+    }catch(err){
+        console.log("error in generating status");
+        return res.json(500,{
+            message:"internal server error"
+        })
+    }
+    
+}
