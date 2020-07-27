@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+//creating schema for patient
 const patientSchema=new mongoose.Schema({
     phoneNo:{
         type:String,

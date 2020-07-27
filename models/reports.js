@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+//creating schema for reports of patients
 const reportSchema=new mongoose.Schema({
     doctorName:{
         type:mongoose.Schema.Types.ObjectId,

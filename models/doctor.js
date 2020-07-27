@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+//creating schema for doctor
 const doctorSchema=new mongoose.Schema({
     name:{
         type:String,
