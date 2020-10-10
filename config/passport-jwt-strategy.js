@@ -18,6 +18,7 @@ passport.use(new jwtStrategy(opts,function(jwtPayload,done){
         if(doctor){
             return done(null,doctor);
         }else{
+            console.log("its testing");
             return done(null,false);
         }
     });
